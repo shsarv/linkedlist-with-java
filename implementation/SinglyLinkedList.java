@@ -3,7 +3,7 @@
  * 
  *  Copy the 3 classes in Node.java, LinkedList.java and Main.java in order to run the implementation
  * 
- *  Dinesh
+ *  Sarvesh Kumar Sharma
  * 
  *   ____________	    _____________       ______________
  *  |item "test1"|	   | item "test2"|      | item "test3" |
