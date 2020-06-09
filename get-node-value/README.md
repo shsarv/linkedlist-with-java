@@ -1,6 +1,7 @@
+## problem
 You’re given the pointer to the head node of a linked list and a specific position. Counting backwards from the tail node of the linked list, get the value of the node at the given position. A position of 0 corresponds to the tail, 1 corresponds to the node before the tail and so on.
 
-Input Format
+### Input Format
 
 You have to complete the int getNode(SinglyLinkedListNode* head, int positionFromTail) method which takes two arguments - the head of the linked list and the position of the node from the tail. positionFromTail will be at least 0 and less than the number of nodes in the list. You should NOT read any input from stdin/console.
 
@@ -13,13 +14,13 @@ The last line contains an integer
 
 denoting the position from the tail, whose value needs to be found out and returned.
 
-Output Format
+### Output Format
 
 Find the node at the given position counting backwards from the tail. Then return the data contained in this node. Do NOT print anything to stdout/console.
 The code in the editor handles output.
 For each test case, print the value of the node, each in a new line.
 
-Sample Input
+#### Sample Input
 
 2
 1
@@ -31,12 +32,11 @@ Sample Input
 1
 2
 
-Sample Output
+#### Sample Output
 
 1
 3
-
- Explanation
+ #### Explanation
 
 In first case, there is one element in linked list with value 1. Hence, last element is 1.
 
