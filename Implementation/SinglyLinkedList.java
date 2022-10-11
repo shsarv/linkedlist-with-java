@@ -17,287 +17,191 @@
   class
   * 
   * */
-  public class Node {
-  	public Object item;
-  	public Node next;
-  }
   
-  /**
-   * LinkedList.java 
-   * 
-   **/
-  public class LinkedList {
-    private int size;
-	  private Node head;
 
-	public LinkedList() {
-		this.size = 0;
-		this.head = null;
-	}
+// Online Java Compiler
+// Use this editor to write, compile and run your Java code online
+import java.util.*;
+class linklist {
+    public static node head;
+     public static node tail;
+    public static int size=0;
+    
+    public static class node{
+        int data;
+        node next;
+        node(int data)
+        {
+            this.data=data;
+            this.next=null;
+        }
+    }
+    public static void size()
+    {
+        System.out.println("    "+ size+"    ");
+    }
+    public static void add(int data){
+        node temp = new node(data);
+        if(size==0)
+        {
+          head=tail= temp;
+          size=1;
+          return;
+        }
+    
+        tail.next=temp;
+        tail=temp;
+        size++;
+    }
+     public static void addfirst(int data){
+        node temp = new node(data);
+        if(size==0)
+        {
+          head=tail= temp;
+          size=1;
+          return;
+        }
+        temp.next=head;
+        head=temp;
+        size++;
+    }
+    public static void addlast(int data){
+        node temp = new node(data);
+        if(size==0)
+        {
+          head=tail= temp;
+          size=1;
+          return;
+        }
+        tail.next=temp;
+        tail=temp;
+        size++;
+    }
+     public static void addati(int idx,int data){
+        
+        if(idx==0)
+        {
+          addfirst(data);
+        }
+        else if(idx==size-1)
+        {
+          addlast(data);
+        }
+        else{
+                  node temp = new node(data);
+                  int k=idx-1;
+                  node temp2=head;
+                  while(k!=0){
+                        temp2=temp2.next;
+                        k--;
+                  }
+                  temp.next=temp2.next;
+                  temp2.next=temp;
+                  size++;
+        }
+       
+    }
+    public static void print(){
+        node temp = head;
+        if(size==0)
+        {
+          System.out.println("list is empty");
+          return ;
+        }
+        while(temp != null){
+           System.out.print(temp.data + "-->");
+           temp=temp.next;
 
-/**
- * Inserting new node at the end of the linked list
- * 
- * @param item - represent the node item to be added to the linked list
- */
-	public void insertNode(String item) {
-		Node node = new Node();
-		node.item = item;
-		Node current = this.head;
-
-		if (this.head == null) {
-			this.head = node;
-			this.head.next = null;
-			this.size = 1;
-			System.out.println(this.head.toString());
-		} else {
-
-			while (current.next != null) {
-				current = current.next;
-			}
-			current.next = node;
-			node.next = null;
-			this.size += 1;
-		}
-	}
-	
-	/**
-	 * Adding node at the first location of the linked list
-	 * 
-	 * @param item - represent item of the node to be added to LL
-	 */
-	public void insertFirst(String item){
-		Node node = new Node();
-		node.item = item;
-		node.next = this.head;
-		this.head = node;
-		this.size++;
-	}
-	
-	/**
-	 * Adding node at the nth location of the linked list
-	 * 
-	 * @param item - represent the item of the node to be added to the list
-	 * @param position - position at which the node is to be added
-	 */
-	public void insertNth(String item, int position) {
-		Node node = new Node();
-		node.item = item;
-		Node current = this.head;
-		if (this.head != null && position <= this.size) {
-			for (int i = 1; i < position; i++) {
-				current = current.next;
-			}
-			node.next = current.next;
-			current.next = node;
-			this.size += 1;
-		}else{
-			System.out.println("Exceeded the linked list size. Current Size: "+size);
-		}
-	}
-
-	/**
-	 * Deleting the first node from the list
-	 */
-	public void deleteFirstNode() {
-		if(head != null){
-			this.head = this.head.next;
-			this.size--;
-		}else{
-			System.out.println("Linked list is empty");
-		}
-	}
-
-	/**
-	 * Deleting the last node from the list
-	 */
-	public void deleteLastNode() {
-		Node currentNode = this.head;
-		if(size == 1){
-			head = null;
-			size = 0;
-		}else{
-			Node prevNode = null;
-			while (currentNode.next != null) {
-				prevNode = currentNode;
-				currentNode = currentNode.next;
-			}
-			prevNode.next = null;
-			this.size--;
-		}
-	}
-
-	/**
-	 * Deleting the node from the nth location in the list
-	 * 
-	 * @param position - location of the node to be deleted
-	 */
-	public void deleteNthNode(int position) {
-		if (position <= this.size && this.head != null) {
-			Node currentNode = this.head;
-			Node prevNode = null;
-			for (int i = 0; i < position; i++) {
-				prevNode = currentNode;
-				currentNode = currentNode.next;
-			}
-			prevNode.next = currentNode.next;
-			this.size--;
-		}else{
-			System.out.println("No node exist at location: "+position);
-		}
-	}
-
-	/**
-	 * Find if the node exist in the list
-	 * 
-	 * @param item - item to be found in the list
-	 * 
-	 */
-	public void findNode(String item) {
-		Node node = this.head;
-		boolean found = false;
-		for(int i=0;i<size; i++){
-			if(node.item.equals(item)){
-				System.out.println("Item "+item+" was found at location "+i+" in the linked list");
-				found = true;
-			}
-			node = node.next;
-		}
-		
-		if(!found)
-			System.out.println("Item "+item+" was not found in the Linked list");
-	}
-
-	/**
-	 * Find the node item located at a specific location
-	 * 
-	 * @param location - Find item at location
-	 * 
-	 */
-	public void findNodeAt(int location) {
-		Node node = this.head;
-		if(head !=null && location<= size){
-			for(int i=0;i<location;i++){
-				node = node.next;
-			}
-			System.out.println("Node item at location "+location+" is "+node.item);
-		}
-	}
-
-	/**
-	 * Find the item at the last location
-	 * 
-	 */
-	public void findLastNode() {
-		Node node = this.head;
-		if(head != null){
-			for(int i=0;i<size-1;i++){
-				node = node.next;
-			}
-			System.out.println("Node item at last location is "+node.item);
-		}
-	}
-
-
-	/**
-	 * Printing all the items in the list
-	 */
-	public void printNodes() {
-		if (this.size < 1)
-			System.out.println("There are no nodes in the linked list");
-		else {
-			Node current = this.head;
-			for (int i = 0; i < this.size; i++) {
-				System.out.println("Node " + current.item + " is at location " + i);
-				current = current.next;
-			}
-		}
-	}
-	
-	/**
-	 * Obtain the current size of the list
-	 * @return
-	 */
-	public int getListSize(){
-		return size;
-	}
-
-}
-   
-
-/**
- * Main.java 
- * 
- **/
- 
- public class Main {
-
-	public static void main(String[] args) {
-		LinkedList list = new LinkedList();
-		
-		System.out.println("Current Size of the list is: "+list.getListSize());
-		
-		list.insertNode("test1");
-		list.insertNode("test2");
-		list.insertNode("test3");
-		list.insertNode("test4");
-		list.insertNode("test5");
-		list.insertNode("test6");
-		list.insertNode("test7");
-		list.printNodes();
-		
-		System.out.println();
-		
-		System.out.println("Finding item test2 in the Linked list");
-		list.findNode("test2");
-		System.out.println("Finding item nonExist in the Lineked list");
-		list.findNode("nonExist");
-		
-		System.out.println();
-		
-		System.out.println("Finding item at location 4");
-		list.findNodeAt(4);
-		
-		System.out.println();
-		System.out.println("Finding item at last location ");
-		list.findLastNode();
-		
-		System.out.println();
-		
-		System.out.println("Current Size of the list is: "+list.getListSize());
-		System.out.println("Adding test1st at start of the Node");
-		list.insertFirst("test1st");
-		list.printNodes();
-		
-		System.out.println();
-		
-		System.out.println("Current Size of the list is: "+list.getListSize());
-		System.out.println("Adding testNth at 2nd Location");
-		list.insertNth("testNth", 2);
-		list.printNodes();
-		
-		System.out.println();
-		
-		System.out.println("Current Size of the list is: "+list.getListSize());
-		System.out.println("Deleting first node");
-		list.deleteFirstNode();
-		list.printNodes();
-		
-		System.out.println();
-		
-		System.out.println("Current Size of the list is: "+list.getListSize());
-		System.out.println("Deleting last node");
-		list.deleteLastNode();
-		list.printNodes();
-		
-		System.out.println();
-		
-		System.out.println("Current Size of the list is: "+list.getListSize());
-		System.out.println("Deleting node from 4th location");
-		list.deleteNthNode(4);
-		list.printNodes();
-	}
-
+        }
+         System.out.println("null");
+    }
+     public static int delete(){
+         node temp=head;
+         if(size==0){
+             System.out.println("list is empty");
+             return -1;
+         }
+         for(int i=0;i<size-2;i++)
+         {
+             temp=temp.next;
+         }
+         int data2 = temp.next.data;
+         temp.next=null;
+         tail=temp;
+         size--;
+         return data2;
+         
+     }
+     public static int deletefirst(){
+         if(size==0){
+             System.out.println("list is empty");
+             return -1;
+         }
+         int data2 = head.data;
+         head=head.next;
+          size--;
+         return data2;
+     }
+     public static int deletelast(){
+           node temp=head;
+         if(size==0){
+             System.out.println("list is empty");
+             return -1;
+         }
+         for(int i=0;i<size-2;i++)
+         {
+             temp=temp.next;
+         }
+         int data2 = temp.next.data;
+                  temp.next=null;
+         tail=temp;
+         size--;
+         return data2;
+     }
+      public static int deleteati(int idx){
+           node temp=head;
+         if(idx>size){
+             System.out.println("error!!!!!");
+             return -1;
+         }
+         for(int i=0;i<idx-1;i++)
+         {
+             temp=temp.next;
+         }
+         int data2 = temp.next.data;
+         temp.next=temp.next.next;
+         size--;
+         return data2;
+     }
+    
+    public static void main(String[] args) {
+        linklist l=new linklist();
+        l.print();l.size();
+        l.add(1); 
+        l.print(); l.size();
+        l.add(2);
+        l.print();l.size();
+        l.add(3);
+        l.print();l.size();
+        l.add(4);
+        l.print();l.size();
+        l.add(5);
+        l.print();l.size();
+        l.addfirst(0);
+        l.print();l.size();
+        l.addlast(6);
+        l.print();l.size();
+        l.addati(2,6);
+        l.print();l.size();
+        l.delete();
+        l.print();l.size();
+        l.deletefirst();
+        l.print(); l.size();
+        l.deletelast();
+        l.print();l.size();
+        l.deleteati(2);
+        l.print();l.size();
+    }
 }
 
 /**
